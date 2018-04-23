@@ -1,0 +1,8 @@
+# Dependency directories
+node_modules/
+
+# Yarn
+yarn.lock
+
+# NPM
+package-lock.json
