@@ -2,6 +2,8 @@ import React from 'react';
 import Header from '../menu/Header';
 import Head from 'next/head';
 import semantic from 'semantic-ui-css/semantic.min.css';
+import { Provider } from 'react-redux';
+import store from '../../redux/store';
 
 const Layout = (WrapperComponent) => {
   return class Layout extends React.Component {
@@ -14,7 +16,9 @@ const Layout = (WrapperComponent) => {
             <style dangerouslySetInnerHTML={{ __html: semantic }} />
           </Head>
           <Header />
-          <WrapperComponent />
+          <Provider store={store()}>
+            <WrapperComponent />
+          </Provider>
         </div>
       );
     }

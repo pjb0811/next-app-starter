@@ -3,12 +3,15 @@ import Link from 'next/link';
 
 const Header = () => {
   return (
-    <div className="ui two item menu">
+    <div className="ui three item menu">
       <Link href="/">
         <a className="item">Home</a>
       </Link>
       <Link href="/about">
         <a className="item">About</a>
+      </Link>
+      <Link href="/redux">
+        <a className="item">redux</a>
       </Link>
     </div>
   );
