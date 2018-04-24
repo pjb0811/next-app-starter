@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as counterActions from "../redux/actions/counter";
 import * as postActions from "../redux/actions/post";
+import withReduxSaga from "next-redux-saga";
 
 class Redux extends Component {
   componentWillMount() {
@@ -47,7 +48,6 @@ class Redux extends Component {
   }
 }
 
-// export default withLayout(Redux);
 export default withLayout(
   connect(
     state => ({
@@ -58,5 +58,5 @@ export default withLayout(
       CounterActions: bindActionCreators(counterActions, dispatch),
       PostActions: bindActionCreators(postActions, dispatch)
     })
-  )(Redux)
+  )(withReduxSaga(Redux))
 );
