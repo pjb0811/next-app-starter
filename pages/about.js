@@ -1,4 +1,5 @@
 import React from 'react';
+import withLayout from '../components/hoc/Layout';
 
 const About = () => (
   <div>
@@ -6,4 +7,4 @@ const About = () => (
   </div>
 );
 
-export default About;
+export default withLayout(About);
