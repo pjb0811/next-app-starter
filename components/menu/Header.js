@@ -1,5 +1,5 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -10,7 +10,7 @@ const Header = () => {
       <Link href="/about">
         <a className="item">About</a>
       </Link>
-      <Link href="/redux">
+      <Link prefetch href="/redux">
         <a className="item">redux</a>
       </Link>
     </div>
