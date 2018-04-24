@@ -18,8 +18,17 @@
   },
   "devDependencies": {
     "@zeit/next-css": "^0.1.5",
+    "autoprefixer": "^8.3.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-wrap-in-js": "^1.1.1",
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.7.0",
-    "react-semantic-ui": "^0.2.0"
+    "glob": "^7.1.2",
+    "now": "^11.1.7",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-loader": "^2.1.4",
+    "raw-loader": "^0.5.1",
+    "react-semantic-ui": "^0.2.0",
+    "semantic-ui-css": "^2.3.1"
   }
 }
