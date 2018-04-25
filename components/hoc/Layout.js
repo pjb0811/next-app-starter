@@ -1,12 +1,20 @@
-import React from "react";
-import Header from "../menu/Header";
-import Head from "next/head";
-import semantic from "semantic-ui-css/semantic.min.css";
-import { Provider } from "react-redux";
-import store from "../../redux/store";
+import React from 'react';
+import Header from '../menu/Header';
+import Head from 'next/head';
+import semantic from 'semantic-ui-css/semantic.min.css';
+import { Provider } from 'react-redux';
+import store from '../../redux/store';
+import withRedux from 'next-redux-wrapper';
+import withReduxSaga from 'next-redux-saga';
 
-const Layout = WrapperComponent => {
-  return class Layout extends React.Component {
+const Layout = Page => {
+  class LayoutWrapper extends React.Component {
+    static async getInitialProps(args) {
+      return {
+        ...(Page.getInitialProps ? await Page.getInitialProps(args) : null)
+      };
+    }
+
     render() {
       return (
         <div className="ui container">
@@ -21,12 +29,13 @@ const Layout = WrapperComponent => {
           </Head>
           <Header />
           <Provider store={store()}>
-            <WrapperComponent {...this.props} />
+            <Page {...this.props} />
           </Provider>
         </div>
       );
     }
-  };
+  }
+  return withRedux(store, state => state)(withReduxSaga(LayoutWrapper));
 };
 
 export default Layout;

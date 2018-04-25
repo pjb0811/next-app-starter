@@ -6,8 +6,7 @@ function* runRequestSuggest(action) {
   try {
     const { data } = yield call(API.getPost, action.payload);
     yield put({ type: post.SUCCESS_POST, payload: { data } });
-  }
-  catch(error) {
+  } catch (error) {
     yield put({ type: post.FAILURE_POST, payload: { error } });
   }
 }

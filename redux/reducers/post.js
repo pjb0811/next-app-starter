@@ -19,8 +19,11 @@ export default handleActions(
 
     [SUCCESS_POST]: (state, action) => {
       const { title, body } = action.payload.data;
-      return state.set('pending', false).set('error', false)
-        .setIn(['data', 'title'], title).setIn(['data', 'body'], body);
+      return state
+        .set('pending', false)
+        .set('error', false)
+        .setIn(['data', 'title'], title)
+        .setIn(['data', 'body'], body);
     },
     [FAILURE_POST]: (state, action) => {
       return state.set('pending', false).set('error', true);

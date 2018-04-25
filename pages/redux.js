@@ -1,12 +1,18 @@
-import React, { Component } from "react";
-import withLayout from "../components/hoc/Layout";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as counterActions from "../redux/actions/counter";
-import * as postActions from "../redux/actions/post";
-import withReduxSaga from "next-redux-saga";
+import React, { Component } from 'react';
+import withLayout from '../components/hoc/Layout';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as counterActions from '../redux/actions/counter';
+import * as postActions from '../redux/actions/post';
+import store from '../redux/store';
 
 class Redux extends Component {
+  static async getInitialProps({ store, req, isServer }) {
+    if (isServer) {
+      await store.dispatch(postActions.requestPost(1));
+    }
+    return;
+  }
   componentWillMount() {
     const { counter } = this.props;
     this.getPost(counter);
@@ -17,13 +23,13 @@ class Redux extends Component {
       this.getPost(nextProps.counter);
     }
   }
-
   getPost = async id => {
     const { PostActions } = this.props;
-    PostActions.requestPost(id);
+    return PostActions.requestPost(id);
   };
 
   render() {
+    console.log(this.props);
     const { post, counter, CounterActions } = this.props;
     const result = post.toJS();
 
@@ -58,5 +64,5 @@ export default withLayout(
       CounterActions: bindActionCreators(counterActions, dispatch),
       PostActions: bindActionCreators(postActions, dispatch)
     })
-  )(withReduxSaga(Redux))
+  )(Redux)
 );

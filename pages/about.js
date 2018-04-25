@@ -1,5 +1,5 @@
-import React from "react";
-import withLayout from "../components/hoc/Layout";
+import React from 'react';
+import withLayout from '../components/hoc/Layout';
 
 const About = () => (
   <div>

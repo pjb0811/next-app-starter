@@ -3,15 +3,14 @@ import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 import reducers from './reducers';
 import rootSaga from './sagas';
+import immutable from 'immutable';
 
 export default function configureStore(initialState) {
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     reducers,
     initialState,
-    applyMiddleware(
-      sagaMiddleware, createLogger()
-    )
+    applyMiddleware(sagaMiddleware, createLogger())
   );
 
   store.runSagaTask = () => {
