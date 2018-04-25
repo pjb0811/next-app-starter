@@ -29,7 +29,6 @@ class Redux extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { post, counter, CounterActions } = this.props;
     const result = post.toJS();
 
