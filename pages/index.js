@@ -1,18 +1,13 @@
 // This is the Link API
 import React from 'react';
-import Head from 'next/head';
 import mainTemplate from '../components/templates/Layout';
+import './index.css';
 
 class Index extends React.Component {
   render() {
     return (
-      <div>
-        <Head>
-          <title>Index</title>
-        </Head>
-        <div>
-          <h1 className="ui header">Hello Next.js</h1>
-        </div>
+      <div className="test">
+        <h1 className="ui header">Hello Next.js</h1>
       </div>
     );
   }
