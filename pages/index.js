@@ -1,7 +1,5 @@
-// This is the Link API
 import React from 'react';
 import mainTemplate from '../components/templates/Layout';
-import './index.css';
 
 class Index extends React.Component {
   render() {
