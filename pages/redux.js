@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import withLayout from '../components/hoc/Layout';
+import mainTemplate from '../components/templates/Layout';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as counterActions from '../redux/actions/counter';
@@ -7,22 +7,24 @@ import * as postActions from '../redux/actions/post';
 import store from '../redux/store';
 
 class Redux extends Component {
-  static async getInitialProps({ store, req, isServer }) {
-    if (isServer) {
-      await store.dispatch(postActions.requestPost(1));
+  static async getInitialProps(ctx) {
+    if (ctx && ctx.isServer) {
+      await ctx.store.dispatch(postActions.requestPost(1));
     }
-    return;
+    return await null;
   }
-  componentWillMount() {
+
+  componentDidMount() {
     const { counter } = this.props;
     this.getPost(counter);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.counter !== nextProps.counter) {
-      this.getPost(nextProps.counter);
+  componentDidUpdate(prevProps) {
+    if (this.props.counter !== prevProps.counter) {
+      this.getPost(this.props.counter);
     }
   }
+
   getPost = async id => {
     const { PostActions } = this.props;
     return PostActions.requestPost(id);
@@ -30,7 +32,6 @@ class Redux extends Component {
 
   render() {
     const { post, counter, CounterActions } = this.props;
-    const result = post.toJS();
 
     return (
       <div>
@@ -38,14 +39,14 @@ class Redux extends Component {
         <h1>{counter}</h1>
         <button onClick={CounterActions.incrementAsync}>+</button>
         <button onClick={CounterActions.decrementAsync}>-</button>
-        {result.pending ? (
+        {post.pending ? (
           <h2>Loading...</h2>
-        ) : result.error ? (
+        ) : post.error ? (
           <h1>Error!</h1>
         ) : (
           <div>
-            <h1>{result.data.title}</h1>
-            <p>{result.data.body}</p>
+            <h1>{post.data.title}</h1>
+            <p>{post.data.body}</p>
           </div>
         )}
       </div>
@@ -53,7 +54,7 @@ class Redux extends Component {
   }
 }
 
-export default withLayout(
+export default mainTemplate(
   connect(
     state => ({
       counter: state.counter,

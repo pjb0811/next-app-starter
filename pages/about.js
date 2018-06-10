@@ -1,5 +1,5 @@
 import React from 'react';
-import withLayout from '../components/hoc/Layout';
+import mainTemplate from '../components/templates/Layout';
 
 const About = () => (
   <div>
@@ -7,4 +7,4 @@ const About = () => (
   </div>
 );
 
-export default withLayout(About);
+export default mainTemplate(About);

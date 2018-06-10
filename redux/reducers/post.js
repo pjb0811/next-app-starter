@@ -2,31 +2,41 @@ import { handleActions } from 'redux-actions';
 import { Map } from 'immutable';
 import { REQUEST_POST, SUCCESS_POST, FAILURE_POST } from '../actions/post';
 
-const initialState = Map({
+const initialState = {
   pending: false,
   error: false,
-  data: Map({
+  data: {
     title: '',
     body: ''
-  })
-});
+  }
+};
 
 export default handleActions(
   {
     [REQUEST_POST]: (state, action) => {
-      return state.set('pending', true).set('error', false);
+      return {
+        ...state,
+        pending: true,
+        error: false
+      };
     },
 
     [SUCCESS_POST]: (state, action) => {
-      const { title, body } = action.payload.data;
-      return state
-        .set('pending', false)
-        .set('error', false)
-        .setIn(['data', 'title'], title)
-        .setIn(['data', 'body'], body);
+      const { data } = action.payload;
+      return {
+        pending: false,
+        error: false,
+        data: {
+          ...data
+        }
+      };
     },
     [FAILURE_POST]: (state, action) => {
-      return state.set('pending', false).set('error', true);
+      return {
+        ...state,
+        pending: false,
+        error: true
+      };
     }
   },
   initialState

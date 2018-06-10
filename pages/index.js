@@ -1,11 +1,21 @@
 // This is the Link API
 import React from 'react';
-import withLayout from '../components/hoc/Layout';
+import Head from 'next/head';
+import mainTemplate from '../components/templates/Layout';
 
-const Index = props => (
-  <div>
-    <h1 className="ui header">Hello Next.js</h1>
-  </div>
-);
+class Index extends React.Component {
+  render() {
+    return (
+      <div>
+        <Head>
+          <title>Index</title>
+        </Head>
+        <div>
+          <h1 className="ui header">Hello Next.js</h1>
+        </div>
+      </div>
+    );
+  }
+}
 
-export default withLayout(Index);
+export default mainTemplate(Index);
