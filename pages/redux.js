@@ -57,8 +57,8 @@ class Redux extends Component {
 export default mainTemplate(
   connect(
     state => ({
-      counter: state.counter,
-      post: state.post
+      counter: state.toJS().counter,
+      post: state.toJS().post
     }),
     dispatch => ({
       CounterActions: bindActionCreators(counterActions, dispatch),
