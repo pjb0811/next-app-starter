@@ -1,11 +1,16 @@
-const express = require('express');
 const next = require('next');
+// const express = require('express');
+// const proxyMiddleware = require('http-proxy-middleware');
+const Koa = require('koa');
+const proxies = require('koa-proxies');
+const Router = require('koa-router');
 
 const devProxy = {
   '/api': {
     target: 'https://jsonplaceholder.typicode.com',
-    pathRewrite: { '^/api': '/' },
-    changeOrigin: true
+    changeOrigin: true,
+    rewrite: path => path.replace('/api', ''),
+    logs: true
   }
 };
 
@@ -13,28 +18,38 @@ const port = parseInt(process.env.PORT, 10) || 3000;
 const env = process.env.NODE_ENV;
 const dev = env !== 'production';
 const app = next({
-  dir: '.', // base directory where everything is, could move to src later
+  dir: '.',
   dev
 });
 
 const handle = app.getRequestHandler();
-
 let server;
+let router;
+
 app
   .prepare()
   .then(() => {
-    server = express();
+    server = new Koa();
+    router = new Router();
 
-    // Set up the proxy.
     if (devProxy) {
-      const proxyMiddleware = require('http-proxy-middleware');
       Object.keys(devProxy).forEach(function(context) {
-        server.use(proxyMiddleware(context, devProxy[context]));
+        server.use(proxies(context, devProxy[context]));
       });
     }
 
-    // Default catch-all handler to allow Next.js to handle all other routes
-    server.all('*', (req, res) => handle(req, res));
+    router.get('*', async ctx => {
+      await handle(ctx.req, ctx.res);
+      ctx.respond = false;
+    });
+
+    server.use(async (ctx, next) => {
+      ctx.res.statusCode = 200;
+      await next();
+    });
+
+    server.use(router.routes());
+    // server.all('*', (req, res) => handle(req, res));
 
     server.listen(port, err => {
       if (err) {

@@ -4,25 +4,27 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as counterActions from '../redux/actions/counter';
 import * as postActions from '../redux/actions/post';
-import store from '../redux/store';
 
 class Redux extends Component {
   static async getInitialProps(ctx) {
     if (ctx && ctx.isServer) {
       await ctx.store.dispatch(postActions.requestPost(1));
+      // setTimeout(() => {
+      //   console.log(ctx.store.getState());
+      // }, 2000);
     }
-    return await null;
+    return await {};
   }
 
   componentDidMount() {
-    const { counter } = this.props;
-    this.getPost(counter);
+    // const { counter } = this.props;
+    // this.getPost(counter);
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.counter !== prevProps.counter) {
-      this.getPost(this.props.counter);
-    }
+    // if (this.props.counter !== prevProps.counter) {
+    //   this.getPost(this.props.counter);
+    // }
   }
 
   getPost = async id => {
