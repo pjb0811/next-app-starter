@@ -9,22 +9,20 @@ class Redux extends Component {
   static async getInitialProps(ctx) {
     if (ctx && ctx.isServer) {
       await ctx.store.dispatch(postActions.requestPost(1));
-      // setTimeout(() => {
-      //   console.log(ctx.store.getState());
-      // }, 2000);
+      console.log(ctx.store.getState());
     }
-    return await {};
+    return {};
   }
 
   componentDidMount() {
-    // const { counter } = this.props;
-    // this.getPost(counter);
+    const { counter } = this.props;
+    this.getPost(counter);
   }
 
   componentDidUpdate(prevProps) {
-    // if (this.props.counter !== prevProps.counter) {
-    //   this.getPost(this.props.counter);
-    // }
+    if (this.props.counter !== prevProps.counter) {
+      this.getPost(this.props.counter);
+    }
   }
 
   getPost = async id => {

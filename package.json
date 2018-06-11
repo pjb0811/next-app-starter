@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Starter Kit for projects using Next.js.",
   "scripts": {
-    "start": "cross-env NODE_ENV=development PORT=3000 node server",
+    "start": "cross-env NODE_ENV=development PORT=9000 node server",
     "build": "next build",
-    "serve": "cross-env NODE_ENV=production PORT=3000 node server",
+    "serve": "yarn build && cross-env NODE_ENV=production PORT=9000 node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "pjb0811",
