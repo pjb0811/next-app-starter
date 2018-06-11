@@ -1,5 +1,5 @@
 import React from 'react';
-import mainTemplate from '../components/templates/Layout';
+import mainTemplate from '../components/templates/Main';
 
 const About = () => (
   <div>
