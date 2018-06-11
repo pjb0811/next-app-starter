@@ -9,7 +9,6 @@ class Redux extends Component {
   static async getInitialProps(ctx) {
     if (ctx && ctx.isServer) {
       await ctx.store.dispatch(postActions.requestPost(1));
-      console.log(ctx.store.getState());
     }
     return {};
   }

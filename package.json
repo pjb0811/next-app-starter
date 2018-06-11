@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Starter Kit for projects using Next.js.",
   "scripts": {
-    "start": "next",
+    "start": "next -p 9000",
     "build": "next build",
-    "serve": "yarn build && next start",
+    "serve": "yarn build && next start -p 9000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "pjb0811",

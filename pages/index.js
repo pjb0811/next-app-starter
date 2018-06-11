@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import mainTemplate from '../components/templates/Main';
 
-class Index extends React.Component {
+class Index extends Component {
   render() {
     return (
       <div className="test">
