@@ -2,6 +2,7 @@ import React from 'react';
 import GlobalBanner from '../organisms/GlobalBanner';
 import Header from '../organisms/Header';
 import Footer from '../organisms/Footer';
+import Loader from './Loader';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as commonActions from '../../redux/actions/common';
@@ -20,19 +21,25 @@ const Main = Page => {
     }
 
     render() {
-      const { pending, error, data } = this.props.common;
-      if (pending || !Object.keys(data).length) {
-        return <div>...loading</div>;
-      }
+      // const { pending, error, data } = this.props.common;
+      // if (pending || !Object.keys(data).length) {
+      //   return <div>pending...</div>;
+      // }
 
-      if (error) {
-        return <div>...error</div>;
-      }
+      // if (error) {
+      //   return <div>error!</div>;
+      // }
 
       return (
         <div id="_wrap" className="wrap">
           <div id="_header" className="mix_header">
-            <GlobalBanner {...this.props} />
+            <Loader
+              response={{ ...this.props.common }}
+              render={data => {
+                return <GlobalBanner data={data} />;
+              }}
+            />
+            {/* <GlobalBanner {...this.props} /> */}
             <Header {...this.props} />
           </div>
           <div id="_container" className="container main">

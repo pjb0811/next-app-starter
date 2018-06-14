@@ -3,7 +3,7 @@ import BannerMap from '../molecules/BannerMap';
 
 class GlobalBanner extends Component {
   render() {
-    const { data } = this.props.common;
+    const { data } = this.props;
     const [bannertop] = data.bannertop;
 
     return (

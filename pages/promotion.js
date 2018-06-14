@@ -5,10 +5,9 @@ class Promotion extends Component {
   render() {
     const { router } = this.props;
     return (
-      <div>
-        <h1>route: {router.route}</h1>
-        <p>id: {router.query.id}</p>
-      </div>
+      <h1>
+        route: {router.route} id: {router.query.id}
+      </h1>
     );
   }
 }

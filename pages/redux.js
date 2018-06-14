@@ -8,14 +8,9 @@ import * as postActions from '../redux/actions/post';
 class Redux extends Component {
   static async getInitialProps(ctx) {
     if (ctx && ctx.isServer) {
-      await ctx.store.dispatch(postActions.requestPostThunk(1));
+      await ctx.store.dispatch(postActions.requestPost(1));
     }
     return {};
-  }
-
-  componentDidMount() {
-    const { counter } = this.props;
-    this.getPost(counter);
   }
 
   componentDidUpdate(prevProps) {
@@ -26,7 +21,7 @@ class Redux extends Component {
 
   getPost = async id => {
     const { PostActions } = this.props;
-    return PostActions.requestPostThunk(id);
+    return PostActions.requestPost(id);
   };
 
   render() {

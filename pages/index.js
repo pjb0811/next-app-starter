@@ -3,11 +3,7 @@ import mainTemplate from '../components/templates/Main';
 
 class Index extends Component {
   render() {
-    return (
-      <div className="test">
-        <h1 className="ui header">index</h1>
-      </div>
-    );
+    return <h1>index</h1>;
   }
 }
 
