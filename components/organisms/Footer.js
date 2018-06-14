@@ -102,7 +102,13 @@ class Footer extends Component {
                     <a
                       className="underline"
                       href="javascript:void(0);"
-                      onclick="window.open('https://image.wemakeprice.com/images/resources/wmp/common/footer-security-2017.jpg','mark','scrollbars=no,resizable=no,width=580,height=820');"
+                      onClick={() => {
+                        window.open(
+                          'https://image.wemakeprice.com/images/resources/wmp/common/footer-security-2017.jpg',
+                          'mark',
+                          'scrollbars=no,resizable=no,width=580,height=820'
+                        );
+                      }}
                     >
                       서비스 가입사실 확인<i className="lay_ico arrow" />
                     </a>

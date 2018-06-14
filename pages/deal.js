@@ -3,9 +3,11 @@ import mainTemplate from '../components/templates/Main';
 
 class Deal extends Component {
   render() {
+    const { router } = this.props;
     return (
-      <div className="test">
-        <h1 className="ui header">Deal</h1>
+      <div>
+        <h1>route: {router.route}</h1>
+        <p>id: {router.query.id}</p>
       </div>
     );
   }

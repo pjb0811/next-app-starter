@@ -18,11 +18,11 @@ class CustomApp extends App {
   }
 
   render() {
-    const { Component, pageProps, store } = this.props;
+    const { Component, pageProps, store, router } = this.props;
     return (
       <Container>
         <Provider store={store}>
-          <Component {...pageProps} />
+          <Component {...pageProps} router={{ ...router }} />
         </Provider>
       </Container>
     );

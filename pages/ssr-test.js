@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Layout from '../components/templates/Layout';
+import mainTemplate from '../components/templates/Main';
 
 class SSRTest extends React.Component {
   static async getInitialProps(context) {
@@ -19,4 +19,4 @@ class SSRTest extends React.Component {
   }
 }
 
-export default Layout(SSRTest);
+export default mainTemplate(SSRTest);

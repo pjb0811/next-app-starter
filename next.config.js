@@ -1,5 +1,5 @@
-const getRoutes = require('./lib/routes');
-
 module.exports = {
-  exportPathMap: getRoutes
+  webpack(config) {
+    return config;
+  }
 };
