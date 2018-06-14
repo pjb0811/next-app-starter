@@ -1,30 +1,31 @@
 import { handleActions } from 'redux-actions';
 import { Map, fromJS } from 'immutable';
-import { REQUEST_POST, SUCCESS_POST, FAILURE_POST } from '../actions/post';
+import {
+  REQUEST_COMMON,
+  SUCCESS_COMMON,
+  FAILURE_COMMON
+} from '../actions/common';
 
 const initialState = Map({
   pending: false,
   error: false,
-  data: Map({
-    title: '',
-    body: ''
-  })
+  data: Map({})
 });
 
 export default handleActions(
   {
-    [REQUEST_POST]: (state, action) => {
+    [REQUEST_COMMON]: (state, action) => {
       return state.set('pending', true).set('error', false);
     },
 
-    [SUCCESS_POST]: (state, action) => {
+    [SUCCESS_COMMON]: (state, action) => {
       const { data } = action.payload;
       return state
         .set('pending', false)
         .set('error', false)
-        .set('data', fromJS(data));
+        .set('data', fromJS(data.data));
     },
-    [FAILURE_POST]: (state, action) => {
+    [FAILURE_COMMON]: (state, action) => {
       return state.set('pending', false).set('error', true);
     }
   },

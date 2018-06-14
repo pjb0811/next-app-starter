@@ -3,14 +3,13 @@ import BannerMap from '../molecules/BannerMap';
 
 class GlobalBanner extends Component {
   render() {
+    const { data } = this.props.common;
+    const [bannertop] = data.bannertop;
+
     return (
       <div className="mix_global_banner" id="_topBannerContainer">
         <div className="mix_inner">
-          <img
-            src="https://view01.wemep.co.kr/wmp-main/37/201806/08/pmt_0boacsf5ld8t.jpg"
-            alt="0611_00~24"
-            useMap="#top_ban_map"
-          />
+          <img src={bannertop.imgUrl} alt="0611_00~24" useMap="#top_ban_map" />
         </div>
         <button
           type="button"
@@ -20,11 +19,11 @@ class GlobalBanner extends Component {
         >
           <span className="spr_mix mix_topbanner_close" />
         </button>
-        <BannerMap />
+        <BannerMap items={bannertop.subLink} />
         <style jsx>{`
           #_topBannerContainer {
             display: block;
-            background: #6695fd;
+            background: ${bannertop.bgColor};
           }
         `}</style>
       </div>

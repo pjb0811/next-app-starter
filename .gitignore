@@ -7,5 +7,5 @@ yarn.lock
 # NPM
 package-lock.json
 
-#Next.js
+# Next.js
 .next

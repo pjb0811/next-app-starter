@@ -1,22 +1,17 @@
-const next = require('next');
 // const express = require('express');
 // const proxyMiddleware = require('http-proxy-middleware');
+const next = require('next');
 const Koa = require('koa');
-const proxies = require('koa-proxies');
+const koaProxy = require('koa-proxies');
 const Router = require('koa-router');
+const { parse } = require('url');
 
-const devProxy = {
-  '/api': {
-    target: 'https://jsonplaceholder.typicode.com',
-    changeOrigin: true,
-    rewrite: path => path.replace('/api', ''),
-    logs: true
-  }
-};
-
+const proxies = require('../lib/proxies');
+const getRoutes = require('../lib/routes');
 const port = parseInt(process.env.PORT, 10) || 3000;
 const env = process.env.NODE_ENV;
 const dev = env !== 'production';
+const routes = getRoutes();
 const app = next({
   dir: '.',
   dev
@@ -32,14 +27,21 @@ app
     server = new Koa();
     router = new Router();
 
-    if (devProxy) {
-      Object.keys(devProxy).forEach(function(context) {
-        server.use(proxies(context, devProxy[context]));
+    if (proxies) {
+      Object.keys(proxies).forEach(function(context) {
+        server.use(koaProxy(context, proxies[context]));
       });
     }
 
     router.get('*', async ctx => {
-      await handle(ctx.req, ctx.res);
+      const { req, res } = ctx;
+      const parsedUrl = parse(req.url, true);
+      const { pathname, query = {} } = parsedUrl;
+      const route = routes[pathname];
+      if (route) {
+        return app.render(req, res, route.page, query);
+      }
+      await handle(req, res);
       ctx.respond = false;
     });
 

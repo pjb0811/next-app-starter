@@ -1,10 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import urlRules from '../../lib/urlRules';
 
 const MapArea = props => {
+  const link = `/${urlRules[props.linkType]}/${props.linkInfo}`;
   return (
-    <Link prefetch href="/promotion/g/solopower">
-      <area shape="poly" coords="0,0,270,0,270,80,0,80" alt="배너" />
+    <Link prefetch href={link}>
+      <area shape="poly" coords={props.mapPosition} alt="배너" />
     </Link>
   );
 };

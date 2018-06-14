@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Starter Kit for projects using Next.js.",
   "scripts": {
-    "start": "next -p 9000",
+    "start": "cross-env NODE_ENV=development PORT=9000 node server",
     "build": "next build",
-    "serve": "yarn build && next start -p 9000",
+    "serve": "yarn build && cross-env NODE_ENV=production PORT=9000 node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "pjb0811",
@@ -24,11 +24,14 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-react": "^7.7.0",
     "express": "^4.16.3",
+    "http": "0.0.0",
+    "http-proxy": "^1.17.0",
     "http-proxy-middleware": "^0.18.0",
     "immutable": "^3.8.2",
     "koa": "^2.5.1",
     "koa-proxies": "^0.7.0",
     "koa-router": "^7.4.0",
+    "micro": "^9.3.2",
     "next-redux-saga": "^3.0.0-beta.2",
     "next-redux-wrapper": "^2.0.0-beta.6",
     "now": "^11.1.7",
@@ -40,6 +43,7 @@
     "redux-immutable": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0",
-    "styled-jsx": "^2.2.6"
+    "styled-jsx": "^2.2.6",
+    "url": "^0.11.0"
   }
 }

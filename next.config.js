@@ -1,17 +1,5 @@
-module.exports = {
-  webpack: config => {
-    /* config.devServer = config.devServer || {};
-    config.devServer.proxy = {
-      '/api': {
-        target: 'https://jsonplaceholder.typicode.com',
-        changeOrigin: true,
-        secure: false,
-        pathRewrite: {
-          '^/api': ''
-        }
-      }
-    }; */
+const getRoutes = require('./lib/routes');
 
-    return config;
-  }
+module.exports = {
+  exportPathMap: getRoutes
 };

@@ -10,7 +10,7 @@ const initializeStore = initialState => {
   const store = createStore(
     reducers,
     initialState,
-    applyMiddleware(sagaMiddleware)
+    applyMiddleware(sagaMiddleware, createLogger())
   );
 
   store.runSagaTask = () => {

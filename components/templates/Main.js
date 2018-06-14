@@ -1,6 +1,10 @@
 import React from 'react';
-import Header from '../organisms/Header';
 import GlobalBanner from '../organisms/GlobalBanner';
+import Header from '../organisms/Header';
+import Footer from '../organisms/Footer';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as commonActions from '../../redux/actions/common';
 
 const Main = Page => {
   class MainWrapper extends React.Component {
@@ -10,19 +14,46 @@ const Main = Page => {
       };
     }
 
+    componentDidMount() {
+      const { CommonActions } = this.props;
+      return CommonActions.requestCommon('');
+    }
+
     render() {
+      const { pending, error, data } = this.props.common;
+      if (pending || !Object.keys(data).length) {
+        return <div>...loading</div>;
+      }
+
+      if (error) {
+        return <div>...error</div>;
+      }
+
       return (
         <div id="_wrap" className="wrap">
           <div id="_header" className="mix_header">
-            <GlobalBanner />
-            <Header />
+            <GlobalBanner {...this.props} />
+            <Header {...this.props} />
           </div>
-          <Page {...this.props} />
+          <div id="_container" className="container main">
+            <Page {...this.props} />
+          </div>
+          <div id="_footer" className="footer_wrap">
+            <Footer />
+          </div>
         </div>
       );
     }
   }
-  return MainWrapper;
+
+  return connect(
+    state => ({
+      common: state.toJS().common
+    }),
+    dispatch => ({
+      CommonActions: bindActionCreators(commonActions, dispatch)
+    })
+  )(MainWrapper);
 };
 
 export default Main;

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import mainTemplate from '../components/templates/Main';
 
-class Index extends Component {
+class Promotion extends Component {
   render() {
     return (
       <div className="test">
-        <h1 className="ui header">index</h1>
+        <h1 className="ui header">promotion</h1>
       </div>
     );
   }
 }
 
-export default mainTemplate(Index);
+export default mainTemplate(Promotion);
