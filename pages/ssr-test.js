@@ -22,7 +22,7 @@ class ssrTest extends Component {
         ) : common.error ? (
           <h1>Error!</h1>
         ) : (
-          <div>server rendering test</div>
+          <div>{JSON.stringify(common.data)}</div>
         )}
       </div>
     );
