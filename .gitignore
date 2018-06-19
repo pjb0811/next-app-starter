@@ -9,3 +9,6 @@ package-lock.json
 
 # Next.js
 .next
+
+# api
+lib/proxies.js
